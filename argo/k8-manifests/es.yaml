@@ -1,0 +1,42 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    azure.workload.identity/client-id: ${USER_ASSIGNED_IDENTITY_CLIENT_ID}
+    azure.workload.identity/tenant-id: <tenant-id>
+  name: external-secrets-test
+  namespace: playground
+---
+apiVersion: external-secrets.io/v1beta1
+kind: SecretStore
+metadata:
+  name: azure-store
+  namespace: playground
+spec:
+  provider:
+    azurekv:
+      authType: WorkloadIdentity
+      vaultUrl: "https://keyvault-test.vault.azure.net"
+      serviceAccountRef:
+        name: external-secrets-test
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: credentials
+  namespace: playground
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: SecretStore
+    name: azure-store
+
+  target:
+    name: credentials
+    creationPolicy: Owner
+  data:
+  # explicit type and name of secret in the Azure KV
+  - secretKey: creds
+    remoteRef:
+      key: secret/credential
