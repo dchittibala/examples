@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
-    namespace: playground
+  namespace: playground
 spec:
   replicas: 1
   selector:
@@ -21,7 +21,7 @@ spec:
       containers:
       - image: nginx:latest
         imagePullPolicy: Always
-        name: update-name-nginx
+        name: nginx
         ports:
         - containerPort: 80
           protocol: TCP
