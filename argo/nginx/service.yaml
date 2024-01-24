@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nginx-service
-  namespace: resource-utilization
+  namespace: playground
 spec:
   internalTrafficPolicy: Cluster
   ports:
