@@ -21,7 +21,7 @@ spec:
       containers:
       - image: nginx:latest
         imagePullPolicy: Always
-        name: nginx
+        name: update-name-nginx
         ports:
         - containerPort: 80
           protocol: TCP
