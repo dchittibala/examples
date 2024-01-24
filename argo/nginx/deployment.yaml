@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
-  namespace: playground
+  namespace: resource-utilization
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: nginx
